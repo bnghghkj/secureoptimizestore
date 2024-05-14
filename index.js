@@ -1,17 +1,15 @@
-function sortedListToBST(head) {
-  if (!head) return null;
-  if (!head.next) return new TreeNode(head.val);
-  let slow = head;
-  let fast = head;
-  let prev = null;
-  while (fast && fast.next) {
-    prev = slow;
-    slow = slow.next;
-    fast = fast.next.next;
+function productExceptSelf(nums) {
+  const n = nums.length;
+  const result = new Array(n).fill(1);
+  let product = 1;
+  for (let i = 0; i < n; i++) {
+    result[i] *= product;
+    product *= nums[i];
   }
-  const root = new TreeNode(slow.val);
-  prev.next = null;
-  root.left = sortedListToBST(head);
-  root.right = sortedListToBST(slow.next);
-  return root;
+  product = 1;
+  for (let i = n - 1; i >= 0; i--) {
+    result[i] *= product;
+    product *= nums[i];
+  }
+  return result;
 }
